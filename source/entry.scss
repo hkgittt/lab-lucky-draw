@@ -1,5 +1,5 @@
 body {
-  color: red;
+  color: gray;
 }
 
 .Hello {
@@ -8,4 +8,18 @@ body {
     color: blue;
   }
   
+}
+
+.group-by-two {
+
+}
+
+.group-by-two__column {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}
+
+.group-by-two__item {
+  padding: 10px;
 }
