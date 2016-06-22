@@ -1,5 +1,6 @@
 {
   "extends": "airbnb",                             
   "rules": {
+    "new-cap": ["warn", { "capIsNewExceptions": [ "Map", "List" ]}]
   }
 }
