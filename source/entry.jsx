@@ -1,3 +1,4 @@
+/*eslint-disable */
 import './entry.scss';
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
@@ -91,6 +92,8 @@ const iterablePropTypeChecker = (props, propName, componentName) => {
 // When input x changes, output y updates automatically in response.
 //
 // Now we know why the library is called React!
+//
+// Below:: Stateless Functional Components
 const GroupByTwo = (props) => (
   <div className="group-by-two">
     {
@@ -132,3 +135,35 @@ App.propTypes = {
 };
 
 ReactDOM.render(<App initialBucket={labNamesOriginalBucket} />, document.getElementById('app'));
+// Just to drive home the point
+
+// Iterative
+// var printCenter = function (str) {
+//   var elem = document.createElement('div');
+//   elem.textContent = str;
+//   elem.style.position = 'absolute';
+//   elem.style.top = window.innerHeight / 2 + 'px'; // this is a state (of the window)
+//   elem.style.left = window.innerWidth / 2 + 'px'; // this is state (of the window)
+//   document.body.appendChild(elem);
+// };
+
+// Functional (pure)
+// var printSomewhere = function (str, height, width) { // explicitly passes in the height and width
+//   var elem = document.createElement('div');
+//   elem.textContent = str;
+//   elem.stye.position = 'absolute';
+//   elem.style.top = height;
+//   elem.style.left = width;
+//   return elem;
+// };
+// document.body.appendChild(
+//   printSomewhere('hello world',
+//   window.innerHeight / 2 + 10 + 'px',
+//   window.innerWidth / 2 + 10 + 'px')
+// );
+
+// How functional approach is more useful and opens up possibilities for re-use
+// var messages = ['Hi', 'Hello', 'Sup', 'Hey', 'Hola'];
+// messages
+//   .map((s, i) => printSomewhere(s, 100 * i * 10, 100 * i * 10))
+//   .forEach(elem => document.body.appendChild(elem)); // does the DOM manipulation
