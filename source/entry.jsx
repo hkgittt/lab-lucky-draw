@@ -4,7 +4,15 @@ import ReactDOM from 'react-dom';
 import { Iterable, List } from 'immutable';
 import _ from 'underscore';
 
-// original data is an immutable array (List)
+// Functional Programming 101
+//
+// 1. "Shared mutable state is the root of all evil"
+//
+// In functional programming, all data is immutable.
+// A piece of data once created is never changed.
+// Instead, functions are responsible for creating new output based on the input data.
+//
+// Below:: original data is an immutable array (List)
 const labNamesOriginalBucket = List([
   '오*석', '강*경', '유*재', '이*선', '안*수', '정*영',
   '권*철', '김*열', '이*혜', '이*훈', '이*기', '오*철', '채*영',
@@ -15,14 +23,34 @@ const labNamesOriginalBucket = List([
   '김*설', '은*현', '이*호', '박*현', '최*준',
 ]);
 
+// Functional Programming 101
+//
+// 2. "Functions must be pure"
+//
+// A "pure" function is defined as follows:
+//  1. Referential Transparency
+//    For the given set of inputs, the output of the function must depend only on those inputs
+//
+//  2. Free of side-effects
+//    Function must not create any observable side effects (such as mutating an input!)
+//
+// Below:: is an example of IMPURE function
 const associateRandomNumber = (range) =>
-  (name) => (
+  (name, index) => (
     {
       name,
-      number: Math.random(range) * 100,
+      // number: Math.random(range) * 100,
+      number: range - index,
     }
   );
 
+// Below:: is an example of PURE function
+const returnFieldValue = (field) =>
+  (obj) => (
+    obj[field]
+  );
+
+// Below:: pure also
 const leaveOnlyField = (field) =>
   (obj) => (
     {
@@ -30,20 +58,17 @@ const leaveOnlyField = (field) =>
     }
   );
 
+// Below:: again, pure
 const objectWithSingleFieldToValue = (obj) =>
   obj[Object.keys(obj)[0]];
 
-const returnFieldValue = (field) =>
-  (obj) => (
-    obj[field]
-  );
-
+// [1, 2, 3].map( number => number + 1 ) // returns new array with [2, 3, 4]
 const shuffleLabNamesBucket = (iterable) =>
   iterable
-    .map(associateRandomNumber(100))
-    .sortBy(returnFieldValue('number'))
-    .map(leaveOnlyField('name'))
-    .map(objectWithSingleFieldToValue);
+    // .map(associateRandomNumber(100))
+    // .sortBy(returnFieldValue('number'))
+    // .map(leaveOnlyField('name'))
+    // .map(objectWithSingleFieldToValue);
 
 // custom PropType checker
 const iterablePropTypeChecker = (props, propName, componentName) => {
@@ -53,13 +78,26 @@ const iterablePropTypeChecker = (props, propName, componentName) => {
   return null;
 };
 
+
+// a React component
+//
+// looks deceptively similar to above functions that we've built
+//
+// input: props
+// output: DOM elements (view)
+// Reactive programming uses functional utilities like
+// map, filter, and reduce to create and process data flows
+// which propogate changes through the system: hence, reactive.
+// When input x changes, output y updates automatically in response.
+//
+// Now we know why the library is called React!
 const GroupByTwo = (props) => (
   <div className="group-by-two">
     {
       props.bucket.map((name, index) =>
         <div key={index} className="group-by-two__column">
           <div className="group-by-two__item">
-            {name}
+            {typeof name === 'object' ? JSON.stringify(name) : name}
           </div>
         </div>
       )
