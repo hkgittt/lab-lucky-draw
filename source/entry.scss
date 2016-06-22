@@ -1,5 +1,7 @@
 body {
   color: gray;
+  padding: 50px;
+  font-family: sans-serif;
 }
 
 .Hello {
@@ -18,8 +20,9 @@ body {
   display: inline-block;
   width: 50%;
   text-align: center;
+  border-bottom: 1px solid #F1F1F1;
 }
 
 .group-by-two__item {
-  padding: 10px;
+  padding: 12px;
 }
