@@ -15,8 +15,6 @@ const labNamesOriginalBucket = List([
   '김*설', '은*현', '이*호', '박*현', '최*준',
 ]);
 
-const aa;
-
 const associateRandomNumber = (range) =>
   (name) => (
     {
@@ -32,20 +30,20 @@ const leaveOnlyField = (field) =>
     }
   );
 
-const objectWithSingleFieldToValue = (obj) => 
-  obj[Object.keys(obj)[0]]
+const objectWithSingleFieldToValue = (obj) =>
+  obj[Object.keys(obj)[0]];
 
 const returnFieldValue = (field) =>
   (obj) => (
     obj[field]
-  )
+  );
 
 const shuffleLabNamesBucket = (iterable) =>
   iterable
     .map(associateRandomNumber(100))
     .sortBy(returnFieldValue('number'))
     .map(leaveOnlyField('name'))
-    .map(objectWithSingleFieldToValue)
+    .map(objectWithSingleFieldToValue);
 
 // custom PropType checker
 const iterablePropTypeChecker = (props, propName, componentName) => {
@@ -53,7 +51,7 @@ const iterablePropTypeChecker = (props, propName, componentName) => {
     return new Error(`${componentName} received a non-iterable bucket`);
   }
   return null;
-}
+};
 
 const GroupByTwo = (props) => (
   <div className="group-by-two">
