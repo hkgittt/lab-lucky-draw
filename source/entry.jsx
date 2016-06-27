@@ -11,7 +11,7 @@ import _ from 'underscore';
 //
 // In functional programming, all data is immutable.
 // A piece of data once created is never changed.
-// Instead, functions are responsible for creating new output based on the input data.
+// Instead, functions are responsible for creating new output data based on the input data.
 //
 // Below:: original data is an immutable array (List)
 const labNamesOriginalBucket = List([
@@ -35,7 +35,7 @@ const labNamesOriginalBucket = List([
 //  2. Free of side-effects
 //    Function must not create any observable side effects (such as mutating an input!)
 //
-// Below:: is an example of IMPURE function
+// Below:: is an example of IMPURE function (because of RANDOMNESS)
 const associateRandomNumber = (range) =>
   (name, index) => (
     {
@@ -93,7 +93,7 @@ const iterablePropTypeChecker = (props, propName, componentName) => {
 //
 // Now we know why the library is called React!
 //
-// Below:: Stateless Functional Components
+// Below:: Stateless Functional Components (PURE)
 const GroupByTwo = (props) => (
   <div className="group-by-two">
     {
@@ -112,6 +112,8 @@ GroupByTwo.propTypes = {
   bucket: iterablePropTypeChecker,
 };
 
+
+// IMPURE
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -134,6 +136,7 @@ App.propTypes = {
   initialBucket: iterablePropTypeChecker,
 };
 
+// IMPURE
 ReactDOM.render(<App initialBucket={labNamesOriginalBucket} />, document.getElementById('app'));
 // Just to drive home the point
 
